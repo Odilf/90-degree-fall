@@ -1,0 +1,4 @@
+.vscode
+results/*
+scraper/node_modules/*
+unigram_freq.csv

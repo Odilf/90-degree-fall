@@ -1,0 +1,10 @@
+{
+	"strict": false,
+	"include": ["*.ts"],
+
+	"compilerOptions": {
+		"target": "ESNext",
+		"moduleResolution": "node",
+		"module": "esnext",
+	},
+}
