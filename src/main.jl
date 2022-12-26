@@ -50,9 +50,35 @@ for (name, set) in files[6:6]
 	paint(create_wordcloud(set), "results/pngs/$name", ratio=2)
 end
 
-map(files) do (name, set)
+list = map(files) do (name, set)
 	frequencies = collect(set)
 	frequencies = sort(frequencies; lt=(a, b) -> a[2] > b[2])
 	frequencies = filter(x -> x[2] > 0, frequencies)[1:20]
-	frequencies
-end[6]
+	name => join(map(f -> "$(f[1]) => $(f[2])", frequencies), "\n")
+end
+
+using Plots
+
+xd = map(files) do (name, set)
+	frequencies = collect(set)
+	frequencies = sort(frequencies; lt=(a, b) -> a[2] > b[2])
+	frequencies = filter(x -> x[2] > 0, frequencies)[1:20]
+end
+
+# plotly()
+backends()
+plotly()
+
+let xd = xd[6]
+	p = plot(
+		[x[1] for x in xd], [x[2] for x in xd]; label="Guardian", color="#3322aa", legend_hfactor=10, seriestype=:bar,
+		xrotation = 45, xticks=:all
+	)
+end
+
+let xd = xd[5]
+	p = plot(
+		[x[1] for x in xd], [x[2] for x in xd]; label="TGP", color="#aa2233", legend_hfactor=10, seriestype=:bar, 
+		xrotation = 45, xticks=:all
+	)
+end
