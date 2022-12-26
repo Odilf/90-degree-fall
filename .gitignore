@@ -1,4 +1,5 @@
 .vscode
 results/*
-scraper/node_modules/*
+scraper/node_modules
 unigram_freq.csv
+.DS_store
