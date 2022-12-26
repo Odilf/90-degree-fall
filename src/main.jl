@@ -11,14 +11,14 @@ function read_folder(path)
 	count_frequencies(big)
 end
 
-guardian_nov = read_folder("scrapper/guardian/nov")
-guardian_dec = read_folder("scrapper/guardian/dec")
+guardian_nov = read_folder("scraper/guardian/nov")
+guardian_dec = read_folder("scraper/guardian/dec")
 
-pundit_nov = read_folder("scrapper/pundit/11")
-pundit_dec = read_folder("scrapper/pundit/12")
+pundit_nov = read_folder("scraper/pundit/11")
+pundit_dec = read_folder("scraper/pundit/12")
 
-guardian_overall = (concat_files("scrapper/guardian/nov") * "\n" * concat_files("scrapper/guardian/dec")) |> count_frequencies
-pundit_overall = (concat_files("scrapper/pundit/11") * "\n" * concat_files("scrapper/pundit/12")) |> count_frequencies
+guardian_overall = (concat_files("scraper/guardian/nov") * "\n" * concat_files("scraper/guardian/dec")) |> count_frequencies
+pundit_overall = (concat_files("scraper/pundit/11") * "\n" * concat_files("scraper/pundit/12")) |> count_frequencies
 
 # patient is the whole set and surgeon is the one that removes the words
 function Base.:(-)(patient, surgeon)
@@ -36,23 +36,23 @@ function Base.:(-)(patient, surgeon)
 end
 
 files = [
-	"pundit_nov.png" => create_wordcloud(pundit_nov - guardian_nov; max_words=700)
-	"guardian_nov.png" => create_wordcloud(guardian_nov - pundit_nov; max_words=700)
+	"pundit_nov.png" => pundit_nov - guardian_nov
+	"guardian_nov.png" => guardian_nov - pundit_nov
 
-	"pundit_dec.png" => create_wordcloud(pundit_dec - guardian_dec; max_words=700)
-	"guardian_dec.png" => create_wordcloud(guardian_dec - pundit_dec; max_words=700)
+	"pundit_dec.png" => pundit_dec - guardian_dec
+	"guardian_dec.png" => guardian_dec - pundit_dec
 
-	"pundit_overall.png" => create_wordcloud(pundit_overall - guardian_overall; max_words=700)
-	"guardian_overall.png" => create_wordcloud(guardian_overall - pundit_overall; max_words=700)
+	"pundit_overall.png" => pundit_overall - guardian_overall
+	"guardian_overall.png" => guardian_overall - pundit_overall
 ]
 
-for (name, wc) in files
-	paint(wc, "results/pngs/$name", ratio=2)
+for (name, set) in files[6:6]
+	paint(create_wordcloud(set), "results/pngs/$name", ratio=2)
 end
 
-let
-	frequencies = guardian_overall - pundit_overall
-	frequencies = collect(frequencies)
+map(files) do (name, set)
+	frequencies = collect(set)
 	frequencies = sort(frequencies; lt=(a, b) -> a[2] > b[2])
 	frequencies = filter(x -> x[2] > 0, frequencies)[1:20]
-end
+	frequencies
+end[6]

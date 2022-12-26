@@ -10,7 +10,7 @@ usesless_words = let
 	sorted = sort(collect(global_frequencies), lt=(a, b) -> a[2] > b[2])
 	most_common = map(w -> w[1], sorted)[1:20]
 
-	bad_words = split(String(read("bad_words.txt")), "\n")
+	bad_words = split(String(read("src/bad_words.txt")), "\n")
 	[most_common..., bad_words...]
 end
 

@@ -4,11 +4,11 @@ An analysis of word usage on left ([The Guardian](https://www.theguardian.com/us
 
 ## Explanation
 
-I took the first article of each day of November and December of the two websites and tallied the frequencies of each word. The choise of newspapers was largely because these two were easier to scrape, since they have dates in their url (maybe I could've used RSS but I couldn't be bothered to learn how it works lol). For each day, the scraper finds the first article link and subsequently copies all of the text of the article. 
+We took the first article of each day of November and December of the two websites and tallied the frequencies of each word. The choice of newspapers was largely because these two were easier to scrape, since they have dates in their url (maybe I could've used RSS but I couldn't be bothered to learn how it works lol). For each day, the scraper finds the first article link and subsequently copies all of the text of the article. 
 
-At first, I wanted to create a word cloud with the frequency of each word. However, the results are very dissapointing, since the most used words are the most common English words. That's not very insightful. Therefore, we need to find a way to compansate for the natural frequency of words.
+At first, we wanted to create a word cloud with the frequency of each word. However, the results are very dissapointing, since the most used words are the most common English words. That's not very insightful. Therefore, we need to find a way to compansate for the natural frequency of words.
 
-I found a [dataset of frequency of English words](https://www.kaggle.com/datasets/rtatman/english-word-frequency), but it didn't turn out to be that useful. In the end, the most succesful idea was subtracting one dataset from the other. This is to leverage the fact that we are doing a comparasion. For example, to create the word cloud for The Guardian we would go through each word and subtract the frequency of that word in TGP (if it appears). This way we get the most common words in The Guardian *that TGP doesn't use* (we do the same for TGP).
+There is a [dataset of frequency of English words](https://www.kaggle.com/datasets/rtatman/english-word-frequency), but it didn't turn out to be that useful. In the end, the most succesful idea was subtracting one dataset from the other. This is to leverage the fact that we are doing a comparasion. For example, to create the word cloud for The Guardian we would go through each word and subtract the frequency of that word in TGP (if it appears). This way we get the most common words in The Guardian *that TGP doesn't use* (we do the same for TGP).
 
 Some manual filtering is still needed though: 
  - The scraper got advertisments from TGP so we removed those by hand
@@ -19,6 +19,6 @@ Some manual filtering is still needed though:
 
 The specific word filter can be seen in `bad_words.txt`
 
-## Epilouge
+## Epilogue
 
 yes. it did hurt
