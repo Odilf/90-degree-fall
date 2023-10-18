@@ -1,5 +1,7 @@
 using WordCloud
 
+const NBSP = ' '
+
 const global_frequencies = begin
 	path = joinpath(@__DIR__, "unigram_freq.csv")
 	content = read(path, String) |> strip
@@ -18,10 +20,12 @@ useless_words = let
 	[most_common..., unimportant_words...]
 end
 
-function count_frequencies(article)::Dict{String, Float32}
+function count_frequencies(article::AbstractString)::Dict{String, Float32}
 	frequencies = Dict()
 
-	words = strip.(split(article, " "))
+	article = replace(article, "Mar a Lago" => "Mar$(NBSP)a$(NBSP)Lago")
+
+	words = strip.(split(article, " "))	
 	
 	words = filter(x -> length(x) > 0, words)
 	words = filter(word -> lowercase(word) ∉ useless_words, words)
