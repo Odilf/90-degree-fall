@@ -15,9 +15,8 @@ Some manual filtering is still needed though:
  - We filtered the 20 most common English words
  - We removed single letters
  - The spaces in "Mar a Lago" were replaced by non-breaking spaces to consider it a single word
- - We removed some other common irrelevant words
-
-The specific word filter can be seen in `unimportant_words.txt`
+ - We removed numbers
+ - We removed some other common irrelevant words (the specific word filter can be seen in `unimportant_words.txt`)
 
 ## Results
 

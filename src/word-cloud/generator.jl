@@ -21,8 +21,11 @@ end
 function count_frequencies(article)::Dict{String, Float32}
 	frequencies = Dict()
 
-	words = filter(x -> length(x) > 0, split(article, " "))
+	words = strip.(split(article, " "))
+	
+	words = filter(x -> length(x) > 0, words)
 	words = filter(word -> lowercase(word) ∉ useless_words, words)
+	words = filter(word -> tryparse(Float64, word) === nothing, words)
 
 	for word ∈ words
 		if  word ∉ keys(frequencies)
@@ -48,13 +51,12 @@ function create_wordcloud(frequencies; max_words = 400)
 		colors = :Pastel1_7,
 		angles = -0:0,
 		fonts = "Helvetica Neue Extrabold",
-		density = 0.55,
+		density = 0.65,
 		mask = shape(ellipse, 2400, 1600, color=(0.1, 0.05, 0.1, 1)),
-		maxfontsize = 200,
+		maxfontsize = 300,
 	)
 
 	layout!(wc, style=:gathering, rt=1, centralword=true)
 
 	generate!(wc, reposition=0.7)
 end
-
