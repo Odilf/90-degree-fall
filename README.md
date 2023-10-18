@@ -17,7 +17,48 @@ Some manual filtering is still needed though:
  - The spaces in "Mar a Lago" were replaced by non-breaking spaces to consider it a single word
  - We removed some other common irrelevant words
 
-The specific word filter can be seen in `bad_words.txt`
+The specific word filter can be seen in `unimportant_words.txt`
+
+## Results
+
+Wordclouds of November and December 2022 for:
+
+The Guardian:
+![Wordcloud guardian](output/wordclouds/guardian_overall.svg)
+
+The Gateway Pundit:
+![Wordcloud pundit](output/wordclouds/pundit_overall.svg)
+
+## Usage
+
+This project uses npm and [Julia](https://julialang.org/), make sure to have installed both.
+
+First, install npm dependencies
+
+```bash
+npm i # Or pnpm i
+```
+
+To scrape the websites you can run the `scrape` command from npm which will guide you with an interactive session on the command line
+
+```bash
+➜ pnpm scrape
+
+> 90-degree-fall@1.0.0 scrape /Users/odilf/Documents/Code/90-degree-fall
+> tsc && node ./dist/main.js
+
+┌  Welcome to 90-degree-fall
+│
+◇  Pick the outlet to scrape
+│  The Guardian, The Gateway Pundit
+│
+◆  Pick months
+│  ◼ November
+│  ◻ December
+└
+```
+
+To generate the word clouds, you can run `npm word-cloud`. You can also just use it through a regular interactive session with Julia
 
 ## Epilogue
 

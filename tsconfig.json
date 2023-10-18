@@ -1,0 +1,12 @@
+{
+	"strict": true,
+	"include": ["src/scraper/*.ts"],
+
+	"compilerOptions": {
+		"target": "ESNext",
+		"moduleResolution": "NodeNext",
+		"module": "NodeNext",
+		"sourceMap": true,
+		"outDir": "dist",
+	},
+}

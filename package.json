@@ -1,0 +1,17 @@
+{
+	"name": "90-degree-fall",
+	"description": "An analysis of word usage on left and right news outlets.",
+	"scripts": {
+		"scrape": "tsc && node ./dist/main.js",
+		"word-cloud": "julia ./src/word-cloud/main.jl"
+	},
+	"version": "1.0.0",
+	"devDependencies": {
+		"typescript": "5.2.2"
+	},
+	"dependencies": {
+		"@clack/prompts": "^0.7.0",
+		"puppeteer": "^19.4.1"
+	},
+	"type": "module"
+}
